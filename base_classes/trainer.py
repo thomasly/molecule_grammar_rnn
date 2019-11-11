@@ -22,7 +22,7 @@ class TrainerBase:
 
     @staticmethod
     def log_path(logdir, tag):
-        time_str = time.strftime("%d-%H:%M:%S", time.localtime())
+        time_str = time.strftime("%d-%H%M%S", time.localtime())
         fname = "{}_{}".format(tag, time_str) if tag is not None else time_str
         return os.path.join(logdir, fname)
 
@@ -48,7 +48,7 @@ class TrainerBase:
 class TrainerArgParser(argparse.ArgumentParser):
     def __init__(self):
         super().__init__()
-        self.add_argument('--logdir', type=str, default='/tmp/models')
+        self.add_argument('--logdir', type=str, default='./tmp/models')
         self.add_argument('--restore', type=str, default='')
         self.add_argument('--tag', type=str, default='')
         self.add_argument('--num_epochs', type=int, default=250)

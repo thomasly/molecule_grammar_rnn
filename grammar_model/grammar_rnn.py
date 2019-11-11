@@ -72,7 +72,7 @@ class BayesRNN(nn.Module):
         for t in range(max_len):
             mask = F.sigmoid(self._projection(self._cell(x_in.repeat(n_samples)))) \
                 .view(n_samples, batch_size, self.alphabet_size).mean(0).round()
-            x_in = x_out[:, t] = (mask * p_mod[:, t, :] + 1e-7).multinomial().squeeze(-1)
+            x_in = x_out[:, t] = (mask * p_mod[:, t, :] + 1e-7).multinomial(n_samples).squeeze(-1)
 
         return x_out
 

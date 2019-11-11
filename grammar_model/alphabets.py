@@ -60,6 +60,7 @@ class Alphabet:
     def generate_perturbed(self, x, p=0.05):
         x_uni = torch.from_numpy(np.random.choice(range(len(self)),
                                                   size=x.size()))
+        x_uni = x_uni.type(torch.LongTensor)
         mask = torch.rand(*x.size()) > p
         x_uni[mask] = x[mask]
         return x_uni
